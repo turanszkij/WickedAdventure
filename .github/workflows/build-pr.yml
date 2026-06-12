@@ -16,8 +16,8 @@ jobs:
       shell: cmd
       run: |
         call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat"
-        MSBuild WickedShooter.sln /t:WickedEngine_Windows /m /p:Configuration=Release /p:Platform=x64
-        MSBuild WickedShooter.sln /t:OfflineShaderCompiler /m /p:Configuration=Release /p:Platform=x64
+        MSBuild WickedAdventure.sln /t:WickedEngine_Windows /m /p:Configuration=Release /p:Platform=x64
+        MSBuild WickedAdventure.sln /t:OfflineShaderCompiler /m /p:Configuration=Release /p:Platform=x64
 
     - name: Generate shader dump
       shell: cmd
@@ -29,20 +29,20 @@ jobs:
       shell: cmd
       run: |
         call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat"
-        MSBuild WickedShooter.sln /t:clean /m /p:Configuration=Release /p:Platform=x64
-        MSBuild WickedShooter.sln /t:WickedShooter /m /p:Configuration=Release /p:Platform=x64
+        MSBuild WickedAdventure.sln /t:clean /m /p:Configuration=Release /p:Platform=x64
+        MSBuild WickedAdventure.sln /t:WickedAdventure /m /p:Configuration=Release /p:Platform=x64
 
     - name: Move files
       shell: cmd
       run: |
-        move BUILD\x64\Release\WickedShooter\WickedShooter.exe .\WickedShooter_Windows.exe
+        move BUILD\x64\Release\WickedAdventure\WickedAdventure.exe .\WickedAdventure_Windows.exe
 
     - name: Package
       uses: actions/upload-artifact@v4
       with:
-        name: WickedShooter (Windows)
+        name: WickedAdventure (Windows)
         path: |
-          WickedShooter_Windows.exe
+          WickedAdventure_Windows.exe
 
 
   linux:
@@ -71,7 +71,7 @@ jobs:
         ./offlineshadercompiler spirv rebuild shaderdump
         mv wiShaderDump.h ../../WickedEngine/
 
-    - name: Compile WickedShooter
+    - name: Compile WickedAdventure
       run: |
         mkdir build
         cd build
@@ -80,14 +80,14 @@ jobs:
 
     - name: Move binaries
       run: |
-        mv build/WickedShooter ./WickedShooter_Linux
+        mv build/WickedAdventure ./WickedAdventure_Linux
 
-    - name: Package WickedShooter
+    - name: Package WickedAdventure
       uses: actions/upload-artifact@v4
       with:
-        name: WickedShooter (Linux)
+        name: WickedAdventure (Linux)
         path: |
-          WickedShooter_Linux
+          WickedAdventure_Linux
 
   macos:
     runs-on: macos-latest
@@ -109,16 +109,16 @@ jobs:
 
     - name: Build Editor
       run: |
-        xcodebuild clean build -project WickedShooter.xcodeproj -scheme WickedShooter -configuration Release
+        xcodebuild clean build -project WickedAdventure.xcodeproj -scheme WickedAdventure -configuration Release
 
     - name: Move files
       run: |
-        BUILD_PATH="$(xcodebuild -project WickedShooter.xcodeproj -scheme WickedShooter -configuration Release -showBuildSettings | grep -m 1 "BUILT_PRODUCTS_DIR" | awk -F' = ' '{print $2}')"
-        mv "${BUILD_PATH}/WickedShooter" ./WickedShooter_MacOS
+        BUILD_PATH="$(xcodebuild -project WickedAdventure.xcodeproj -scheme WickedAdventure -configuration Release -showBuildSettings | grep -m 1 "BUILT_PRODUCTS_DIR" | awk -F' = ' '{print $2}')"
+        mv "${BUILD_PATH}/WickedAdventure" ./WickedAdventure_MacOS
 
-    - name: Package WickedShooter
+    - name: Package WickedAdventure
       uses: actions/upload-artifact@v4
       with:
-        name: WickedShooter (Mac OS)
+        name: WickedAdventure (Mac OS)
         path: |
-          WickedShooter_MacOS
+          WickedAdventure_MacOS
