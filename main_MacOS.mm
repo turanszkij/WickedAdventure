@@ -24,7 +24,7 @@ int main( int argc, char* argv[] )
                                                                   NSWindowStyleMaskResizable)
                                                          backing:NSBackingStoreBuffered
                                                            defer:NO];
-        [window setTitle:@"Wicked Shooter"];
+        [window setTitle:@"Wicked Adventure"];
         [window center];
         [window makeKeyAndOrderFront:nil];
         
