@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
     );
     SDL_SetWindowIcon(window.get(), icon);
     SDL_FreeSurface(icon);
-    stbi_free(pixel_data);
+    stbi_image_free(pixel_data);
 
     // Create and run Wicked Engine application:
     wi::Application application;
