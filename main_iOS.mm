@@ -26,6 +26,7 @@ wi::Application app;
     app.SetWindow((__bridge void*)self.window);
     
     wi::backlog::setFontColor(config::backlog_color);
+    wi::backlog::setBackgroundColor(config::background_color);
     
     self.displayLink = [CADisplayLink displayLinkWithTarget:self
                                                        selector:@selector(gameLoop)];
@@ -73,6 +74,7 @@ wi::Application app;
         {
             std::string scriptfile = std::string(config::main_script_file);
             wi::lua::RunFile(wi::helper::GetCurrentPath() + "/" + scriptfile);
+            wi::font::AddFontStyle("font_awesome_v6", font_awesome_v6, sizeof(font_awesome_v6));
             is_startup = true;
         }
     }

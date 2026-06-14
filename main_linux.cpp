@@ -48,6 +48,7 @@ int main(int argc, char *argv[])
     application.SetWindow(window.get());
 
     wi::backlog::setFontColor(config::backlog_color); // customize backlog color for this app
+    wi::backlog::setBackgroundColor(config::background_color);
 
     SDL_Event event;
 
@@ -61,6 +62,7 @@ int main(int argc, char *argv[])
         if (!is_startup && wi::initializer::IsInitializeFinished())
         {
             wi::lua::RunFile(wi::helper::GetCurrentPath() + "/" + std::string(config::main_script_file));
+            wi::font::AddFontStyle("font_awesome_v6", font_awesome_v6, sizeof(font_awesome_v6));
             is_startup = true;
         }
 

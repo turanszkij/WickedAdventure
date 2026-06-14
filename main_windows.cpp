@@ -39,6 +39,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     HACCEL hAccelTable = LoadAccelerators(hInstance, nullptr);
 
     wi::backlog::setFontColor(config::backlog_color);
+    wi::backlog::setBackgroundColor(config::background_color);
 
 	MSG msg = { 0 };
 	while (msg.message != WM_QUIT)
@@ -55,6 +56,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             if (!is_startup && wi::initializer::IsInitializeFinished())
             {
                 wi::lua::RunFile(wi::helper::GetCurrentPath() + "/" + std::string(config::main_script_file));
+                wi::font::AddFontStyle("font_awesome_v6", font_awesome_v6, sizeof(font_awesome_v6));
                 is_startup = true;
             }
 		}

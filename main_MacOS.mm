@@ -36,6 +36,7 @@ int main( int argc, char* argv[] )
         application.SetWindow((__bridge wi::platform::window_type)window);
         
         wi::backlog::setFontColor(config::backlog_color);
+        wi::backlog::setBackgroundColor(config::background_color);
         
         while (running)
         {
@@ -106,6 +107,7 @@ int main( int argc, char* argv[] )
                         path = path.substr(0, found + 1);
                     }
                     wi::lua::RunFile(path + scriptfile);
+                    wi::font::AddFontStyle("font_awesome_v6", font_awesome_v6, sizeof(font_awesome_v6));
                     is_startup = true;
                 }
                 
